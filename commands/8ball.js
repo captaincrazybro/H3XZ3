@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
+	if(!args[0]) return message.channel.send("Please specify a question");
 	let pick = Math.floor(Math.random() * 11); 
 	
 	if(pick === 0){
@@ -50,5 +53,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-    name: "8ball"
+    name: `${prefix}8ball`
 }

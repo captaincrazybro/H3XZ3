@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	message.channel.send({embed: {
@@ -10,5 +12,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "a1"
+	name: `${prefix}a1`
 }

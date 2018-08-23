@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 let varrr = 0;
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	let voteLvl = 1;
@@ -29,5 +31,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "vote"
+	name: `${prefix}vote`
 }

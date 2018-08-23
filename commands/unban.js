@@ -1,7 +1,9 @@
 const Discord = require("discord.js");
+const botConfig = require('../botsettings.json');
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
-	let ubUser = message.guild.member(message.guild.members.get(args[0]));
+	let ubUser = args[0];
 	if(!ubUser) return message.channel.send(":x:" + " ***I can't fine that user***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
@@ -10,40 +12,29 @@ module.exports.run = async (bot, message, args) => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
-	if(ubUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:" + " ***This user can not be banned!***").then(m => {
-		message.delete().catch(O_o=>{});
-		m.delete(5000);
-	});
-	let ubanChannel = message.guild.channels.find(`name`, "automodlog");
+	let ubanChannel = message.guild.channels.find(`name`, "logs");
 	if(!ubanChannel) return message.channel.send(":x:" + " ***I can't find this channel***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
 	
-	let ubReason = args.slice(2).join(" ");
-	
-	if(!ubReason) return message.channel.send(":x:" + " ***Please specify a reason and/or a time***").then(m => {
-		message.delete().catch(O_o=>{});
-		m.delete(5000);
-	});
 		
-	let banTEmbed = new Discord.RichEmbed()
-		.setDescription("TempBan")
-		.setColor("RED")
-		.addField("Banned User", `${bUser} with ID: ${bUser.id}`)
-		.addField("Banned By", `<@${message.author.id}> with ID: ${message.author.id}`)
-		.addField("Banned In", message.channel)
+	let unbanEmbed = new Discord.RichEmbed()
+		.setDescription("Unban")
+		.setColor("GREEN")
+		.addField("Unbanned User", `${ubUser}`)
+		.addField("Unbanned By", `<@${message.author.id}> with ID: ${message.author.id}`)
+		.addField("Unbanned In", message.channel)
 		.addField("Time", message.createdAt)
-		.addField("How Long", bantime)
-		.addField("Reason", bReason); 	
-			
+		
 	message.guild.unban(ubUser); 
-	message.channel.send(":white_check_mark: ***" + `${bUser}` + "*** ***has been banned***").then(m => {
+	message.channel.send(":white_check_mark: ***" + `${ubUser}` + "*** ***has been unbanned***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
+	ubanChannel.send(unbanEmbed);
 }
 
 module.exports.help = {
-    name: "unban"
+    name: `${prefix}unban`
 }

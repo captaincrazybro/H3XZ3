@@ -1,5 +1,9 @@
 const Discord = require("discord.js");
 const ms = require("ms");
+let fs = require("fs");
+let ban = require("../banhistory.json");
+const botConfig = require('../botsettings.json');
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	let bUser = message.guild.member(message.mentions.users.first() || args[0]);
@@ -15,13 +19,20 @@ module.exports.run = async (bot, message, args) => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
-	let banChannel = message.guild.channels.find(`name`, "automodlog");
+	let banChannel = message.guild.channels.find(`name`, "logs");
 	if(!banChannel) return message.channel.send(":x:" + " ***I can't find this channel***").then(m => {
 		message.delete().catch(O_o=>{});
 		m.delete(5000);
 	});
 	
  	if(args.length === 1){
+		
+	let bReason = args.slice(1).join(" ");
+	
+	if(!bReason) return message.channel.send(":x:" + " ***Please specify a reason***").then(m => {
+		message.delete().catch(O_o=>{});
+		m.delete(5000);
+	});
 	
 	let banEmbed = new Discord.RichEmbed()
 		.setDescription("PermBan")
@@ -35,6 +46,22 @@ module.exports.run = async (bot, message, args) => {
 	banChannel.send(banEmbed);
 	message.delete().catch(O_o=>{});
 	message.channel.send(":white_check_mark: ***" + `${User}` + "*** ***has been banned***");
+
+ 	if(!ban[bUser.id]) ban[bUser.id] = {
+		ban: `\n- Banned for ${bReason}`
+	} 
+	if(ban[bUser.id].ban === "None"){
+		ban[bUser.id].ban = `\n- Banned for ${bReason}`;
+	}else{
+		let banInfo = ban[bUser.id].ban;
+		ban[bUser.id] = {
+			ban: `${banInfo} \n- Banned for ${bReason}`
+		}
+	}
+		
+    fs.writeFile("./banhistory.json", JSON.stringify(ban), (err) => {
+        if (err) console.log(err);
+    });
 	
 	}else{ 
 		
@@ -57,21 +84,33 @@ module.exports.run = async (bot, message, args) => {
 		.addField("Reason", bReason); 	
 			
 	message.guild.member(bUser).ban(bReason);
-	message.channel.send(":white_check_mark: ***" + `${bUser}` + "*** ***has been banned***").then(m => {
-		message.delete().catch(O_o=>{});
-	});
-	bUser.send(`You have been banned from ${message.guild.name}`);
+	message.channel.send(":white_check_mark: ***" + `${bUser}` + "*** ***has been banned***");
 			
 	setTimeout(function(){
 		message.guild.unban(bUser); 
 		banChannel.send(":white_check_mark: ***" + `${bUser}` + "*** ***has been unbanned***");
-		bUser.send("You have been unbanned from ${message.guild.name}. Here is the link to join it again: https://discord.gg/wtDRfsb");
 	}, ms(bantime));
-	message.delete().catch(O_o=>{});
 	banChannel.send(banTEmbed);
+	
+	
+ 	if(!ban[bUser.id]) ban[bUser.id] = {
+		ban: `\n- Banned ${bantime} for ${bReason}`
+	} 
+	if(ban[bUser.id].ban === "None"){
+		ban[bUser.id].ban = `\n- Banned ${bantime} for ${bReason}`;
+	}else{
+		let banInfo = ban[bUser.id].ban;
+		ban[bUser.id] = {
+			ban: `${banInfo} \n- Banned ${bantime} for ${bReason}`
+		}
+	}
+		
+    fs.writeFile("./banhistory.json", JSON.stringify(ban), (err) => {
+        if (err) console.log(err);
+    }); 
 	}
 }
 
 module.exports.help = {
-	name: "ban"
+	name: `${prefix}ban`
 }

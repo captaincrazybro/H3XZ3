@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const botConfig = require('../botsettings.json');
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -18,12 +20,23 @@ module.exports.run = async (bot, message, args) => {
 		m.delete(5000);
 	});
 	
+	let umuteChannel = message.guild.channels.find(`name`, "logs");
+	
+	let umuteEmbed = new Discord.RichEmbed()
+		.setDescription("Unmute")
+		.setColor("GREEN")
+		.addField("Unmuted User", `${umUser} with ID: ${umUser.id}`)
+		.addField("Unmuted By", `<@${message.author.id}> with ID: ${message.author.id}`)
+		.addField("Unmuted In", message.channel)
+		.addField("Time", message.createdAt)
+	
+	
 	umUser.removeRole(muterole.id);
 	message.channel.send(":white_check_mark: ***" + `${umUser}` + "*** ***has been unmuted***");
-	bUser.send(`You have been unmuted from ${message.guild.name}`);
-	
+	umUser.send(`You have been unmuted from ${message.guild.name}`);
+	umuteChannel.send(umuteEmbed);
 }
 
 module.exports.help = {
-	name: "unmute"
+	name: `${prefix}unmute`
 }

@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const botConfig = require('../botsettings.json');
+let prefix = botConfig.prefix;
 
 module.exports.run = async (bot, message, args) => {
 	
@@ -15,21 +17,20 @@ module.exports.run = async (bot, message, args) => {
 		
 	let reportEmbed = new Discord.RichEmbed()
 	.setDescription("Reports")
-	.setColor("RED")
+	.setColor(`#ffff00`)
 	.addField("Reported User", `${rUser} with ID: ${rUser.id}`)
 	.addField("Reported By", `${message.author} with ID: ${message.author.id}`)
 	.addField("Channel", message.channel)
 	.addField("Time", message.createdAt)
 	.addField("Reason", reason);
 	
-	let reportschannel = message.guild.channels.find(`name`, "automodlog");
+	let reportschannel = message.guild.channels.find(`name`, "logs");
 	if(!reportschannel) return message.channel.send(":x:" + " ***Couldn't find reports channel.***");
-	message.delete().catch(O_o=>{});
 	reportschannel.send(reportEmbed);
 	message.channel.send(":white_check_mark: ***" + `${rUser}` + "*** ***has been reported***");
 		
 }
 
 module.exports.help = {
-	name: "report"
+	name: `${prefix}report`
 }

@@ -1,4 +1,7 @@
 const Discord = require("discord.js");
+const botConfig = require("../botsettings.json");
+let prefix = botConfig.prefix;
+
 
 module.exports.run = async (bot, message, args) => {
 	if(args[0] === `elites` || `Elites`){
@@ -12,5 +15,5 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-	name: "h3x"
+	name: `${prefix}h3x`
 }

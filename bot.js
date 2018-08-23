@@ -22,6 +22,7 @@ fs.readdir("./commands/", (err, files) => {
     });
   });
   
+  client.on('error', console.error);
   
 bot.on("ready", async () => {
 	console.log(`${bot.user.username} is online!`);
@@ -38,14 +39,14 @@ bot.on("message", async message => {
 	let args = messageArray.slice(1);
 	let tUser = message.guild.member(message.guild.members.get(args[0]));
 	
-    let commandfile = bot.commands.get(cmd.slice(prefix.length));
+    let commandfile = bot.commands.get(cmd);
     if(commandfile) commandfile.run(bot,message,args,cmd,fs);
 	
 	if(cmd === `${prefix}arouzH3X`){
 				message.channel.send({ embed: {
 			color: 3447003,
 			title: "ArouzH3X",
-			description: "```Leader; BarouzH3X \nArouzH3X \nCaptarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
+			description: "```Leader; BarouzH3X \nArouzH3X \nCaparouzH3X \nJarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
 		}});
 		message.delete().catch(O_o=>{});
 	};
@@ -53,7 +54,7 @@ bot.on("message", async message => {
 				message.channel.send({ embed: {
 			color: 3447003,
 			title: "ArouzH3X",
-			description: "```Leader; BarouzH3X \nArouzH3X \nCaptarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
+			description: "```Leader; BarouzH3X \nArouzH3X \nCaparouzH3X \nJarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
 		}});
 		message.delete().catch(O_o=>{});
 	};
@@ -61,7 +62,7 @@ bot.on("message", async message => {
 				message.channel.send({ embed: {
 			color: 3447003,
 			title: "ArouzH3X",
-			description: "```Leader; BarouzH3X \nArouzH3X \nCaptarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
+			description: "```Leader; BarouzH3X \nArouzH3X \nCaparouzH3X \nJarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
 		}});
 		message.delete().catch(O_o=>{});
 	};
@@ -69,39 +70,15 @@ bot.on("message", async message => {
 		message.channel.send({ embed: {
 			color: 3447003,
 			itle: "ArouzH3X",
-			description: "```Leader; BarouzH3X \nArouzH3X \nCaptarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
+			description: "```Leader; BarouzH3X \nArouzH3X \nCaparouzH3X \nJarouzH3X \nMarouzH3X \nMegarouzH3X             ```"
 	}});
 	message.delete().catch(O_o=>{});
 	};
-	if(cmd === `${prefix}emnas`){
+	if(cmd === `${prefix}emnas` || cmd === `${prefix}Emnas`){
 		message.channel.send({ embed: {
 			color: 3447003,
 			title: "EmnasH3X",
-			description: "```Leader; BelnapZ3 \nBemnasH3X \nJemnasH3X \ \nVemnasH3X \nVeremnasH3X \nZremnasH3X             ```"
-		}});
-		message.delete().catch(O_o=>{});
-	};
-	if(cmd === `${prefix}Emnas`){
-		message.channel.send({ embed: {
-			color: 3447003,
-			title: "EmnasH3X",
-			description: "```Leader; BelnapZ3 \nBemnasH3X \nJemnasH3X \ \nVemnasH3X \nVeremnasH3X \nZremnasH3X             ```"
-		}});
-		message.delete().catch(O_o=>{});
-	};
-	if(cmd === `${prefix}EmnasH3X`){
-		message.channel.send({ embed: {
-			color: 3447003,
-			title: "EmnasH3X",
-			description: "```Leader; BelnapZ3 \nBemnasH3X \nJemnasH3X \ \nVemnasH3X \nVeremnasH3X \nZremnasH3X             ```"
-		}});
-		message.delete().catch(O_o=>{});
-	};
-	if(cmd === `${prefix}emnasH3X`){
-		message.channel.send({ embed: {
-			color: 3447003,
-			title: "EmnasH3X",
-			description: "```Leader; BelnapZ3 \nBemnasH3X \nJemnasH3X \ \nVemnasH3X \nVeremnasH3X \nZremnasH3X             ```"
+			description: "```Leader; BelnapZ3 \nBemnasH3X \nDremnasH3X \nFemnasH3X \nPemnasH3X \nSezemnasH3X \nTemnasH3X \nQemnasH3X \nXemnasH3X             ```"
 		}});
 		message.delete().catch(O_o=>{});
 	};

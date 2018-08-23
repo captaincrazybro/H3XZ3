@@ -1,17 +1,15 @@
 {
-  "name": "h3x-z3",
+  "name": "h3xz3discordbot",
   "version": "1.0.0",
-  "description": "H3X-Z3's discord bot",
+  "description": "Bot for the H3XZ3 discord",
   "main": "bot.js",
-  "author": "captaincrazybro",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Capt",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.3.2",
-    "discord.js-aliases": "^1.1.6",
-    "discord.js-commando": "^0.10.0",
-    "ffmpeg": "0.0.4",
-    "ffmpeg-binaries": "^3.2.2-3",
-    "ms": "^2.1.1",
-    "opusscript": "0.0.6"
+    "ms": "^2.1.1"
   }
 }
